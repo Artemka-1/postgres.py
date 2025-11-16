@@ -12,21 +12,19 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 def seed():
-    # Groups
     groups = []
     for name in ["A-101", "B-202", "C-303"]:
         group = Group(name=name)
         session.add(group)
         groups.append(group)
 
-    # Teachers
     teachers = []
     for _ in range(4):
         t = Teacher(fullname=fake.name())
         session.add(t)
         teachers.append(t)
 
-    # Subjects
+  
     subjects = []
     subject_names = ["Math", "History", "Biology", "Physics", "Chemistry", "English"]
     for name in subject_names:
@@ -34,7 +32,7 @@ def seed():
         session.add(s)
         subjects.append(s)
 
-    # Students
+
     students = []
     for _ in range(40):
         st = Student(fullname=fake.name(), group=random.choice(groups))
@@ -43,7 +41,7 @@ def seed():
 
     session.commit()
 
-    # Grades
+
     for student in students:
         for subject in subjects:
             for _ in range(random.randint(5, 20)):
